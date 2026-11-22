@@ -1,368 +1,489 @@
-# CORE NEXUS — Setup Guide
-### (Written so anyone can follow along!)
+&#x20;<div align="center">
 
-```
-╔══════════════════════════════════════════════╗
-║          CORE NEXUS — v2.0                   ║
-║   Your Personal AI Butler for your PC        ║
-╚══════════════════════════════════════════════╝
-```
 
----
 
-## What is Core Nexus?
+\# NEXUS
 
-Imagine having a butler who lives inside your computer — inspired by Jarvis from Iron Man.
-You say **"Nexus"** (or just **"Nexus"** in text mode), tell it what you want, and it does it.
 
-- *"Nexus, open Minecraft"* → Minecraft launches automatically
-- *"Nexus, set volume to 50"* → Volume changes to 50%
-- *"Nexus, order me a pizza from Dominos"* → Dominos opens ready to order
-- *"Nexus, what's on my screen?"* → AI reads and describes your screen
-- *"Nexus, snap Discord to the left"* → Window snaps to left half
-- *"Nexus, remind me at 6pm to eat"* → Sets a timed reminder
 
-The AI brain runs **100% on your own computer** — no cloud, no subscription, no API key.
-It uses your GPU to think, just like it does for games.
+\### Personal AI System
 
----
 
-## Before You Start — What You'll Need
 
-- A Windows PC (Windows 10 or 11)
-- An internet connection (just for setup — Nexus runs offline after)
-- A microphone (built-in or USB both work)
-- An NVIDIA GPU with at least 4GB VRAM (GTX 1060 or better)
+\*\*Your desktop. Your AI. Your control.\*\*
 
-> No good GPU? It still works, just slower — responses take ~20 seconds instead of ~2.
 
----
 
-## File Structure
+!\[NEXUS Banner](nexus\_banner.png)
 
-```
-F:\Projects\core-nexus\
-├── launcher.pyw            ← Double-click to start everything (HUD GUI)
-├── create_shortcut.bat     ← Run once to create a desktop shortcut
-├── core_nexus.py           ← Main voice loop and Ollama AI bridge
-├── nexus_server.py         ← Web dashboard server (localhost:8080)
-├── executor.py             ← OS action dispatcher
-├── app_scanner.py          ← Startup drive scanner, builds app index
-├── fuzzy_match.py          ← Speech error correction and failure tracking
-├── conversation_memory.py  ← Persistent conversation history
-├── screen_vision.py        ← Screenshot + AI vision
-├── food_ordering.py        ← Restaurant website navigation
-├── notifications.py        ← Background CPU/GPU monitor and reminders
-├── wake_word.py            ← Offline wake word detection (Hey Jarvis)
-├── tts_piper.py            ← Neural British voice (Piper TTS)
-├── window_manager.py       ← Window snap, focus, tile
-├── usage_tracker.py        ← App launch statistics
-├── config.json             ← App registry and macros
-├── requirements.txt        ← Python dependencies
-├── setup.bat               ← One-click dependency installer
-├── launch_nexus.ps1        ← PowerShell launcher (alternative)
-└── nexus_ui\index.html     ← Jarvis HUD web dashboard
-```
 
----
 
-## STEP 1 — Install Python
+\[!\[Windows](https://img.shields.io/badge/Platform-Windows-0078D4)](https://www.microsoft.com/windows)
 
-Download and install **Python 3.12** from https://www.python.org/downloads/
+\[!\[Tauri](https://img.shields.io/badge/Tauri-2-24C8DB)](https://tauri.app/)
 
-> **Critical:** During install, tick **"Add Python to PATH"** before clicking Install.
+\[!\[React](https://img.shields.io/badge/React-19-61DAFB)](https://react.dev/)
 
-Check it worked — open PowerShell and type:
-```powershell
-python --version
-# Should show: Python 3.12.x
-```
+\[!\[Python](https://img.shields.io/badge/Python-3.12-3776AB)](https://www.python.org/)
 
----
 
-## STEP 2 — Install Ollama
 
-Ollama is the program that runs the AI brain locally on your GPU.
+</div>
 
-1. Go to 👉 **https://ollama.com** and click Download
-2. Run the installer
-3. Open PowerShell and pull the AI model:
 
-```powershell
-ollama pull gemma3:4b
-```
 
-This downloads about **3GB** — like downloading a game. Wait for it to finish.
+\---
 
-Check it worked:
-```powershell
-ollama list
-# Should show: gemma3:4b
-```
 
-> Every time you use Nexus, Ollama needs to be running. It usually starts automatically.
-> If Nexus says "Ollama is not running", click **Start Ollama** in the launcher.
 
----
+\## Overview
 
-## STEP 3 — Copy the Project Files
 
-Place all project files into:
-```
-F:\Projects\core-nexus\
-```
 
-You can use a different path — just be consistent throughout.
+\*\*NEXUS\*\* is a personal AI desktop system that brings AI conversations, desktop application control, automation, voice interaction, and remote access together in one environment.
 
----
 
-## STEP 4 — Run Automatic Setup
 
-This does everything for you — installs dependencies, detects your apps, builds
-a personalised `config.json`, and creates a desktop shortcut:
+The project combines a modern Tauri desktop application, a Rust integration layer, Python system modules, and Telegram remote control.
 
-```powershell
-cd F:\Projects\core-nexus
-python setup_nexus.py
-```
 
-That's it. The script will:
-- Install all Python packages automatically
-- Start Ollama and download the AI model
-- Scan your PC for installed apps and build `config.json` for **your** system
-- Set the PowerShell execution policy
-- Create a **Core Nexus** shortcut on your Desktop
 
-> The config is built specifically for whoever runs this script — no manual path editing needed.
+NEXUS is actively evolving, with its interface and core capabilities under continuous development.
 
----
 
-## STEP 8 — Launch
 
-**Option A — Desktop shortcut (easiest after setup):**
-```
-Double-click "Core Nexus" on your desktop
-```
+\## Features
 
-**Option B — Direct launch:**
-```powershell
-cd F:\Projects\core-nexus
-& "C:\Users\lukes\AppData\Local\Programs\Python\Python312\pythonw.exe" launcher.pyw
-```
 
-**Option C — Text mode (no microphone, good for testing):**
-```powershell
-python core_nexus.py --text
-```
 
-**Option D — Web UI only:**
-```powershell
-python nexus_server.py
-# Then open: http://localhost:8080
-```
+\### Desktop Application
 
----
 
-## STEP 9 — First Boot
 
-On first launch, Nexus scans all your drives to build an app index.
-This takes **15–60 seconds** and you'll see:
+\- Native desktop application built with Tauri 2.
 
-```
-[SCAN] Building app cache across all drives...
-[SCAN] Drive C:\ ... 469 apps found
-[SCAN] Drive F:\ ... 168 apps found
-[SCAN] Cache saved: 896 apps
-[OK] App index ready!
-```
+\- Modern React and TypeScript interface.
 
-Every launch after that loads from cache instantly. It rescans every 24 hours automatically.
+\- Interactive AI orb and home dashboard.
 
-The launcher shows a **Jarvis HUD** with animated rotating rings and a pulsing arc reactor.
-Click **▶ LAUNCH NEXUS** to start both the voice engine and web dashboard together.
+\- Application management and launching.
 
----
+\- Custom macros and automation workflows.
 
-## Usage — Voice Commands
+\- Integrated settings and appearance customization.
 
-Say **"Nexus"** followed by your command:
+\- Dedicated AI chat interface.
 
-| Say This | What Happens |
+\- FREE and TITAN subscription architecture.
+
+
+
+\### AI Chats
+
+
+
+\- Communication with supported AI providers.
+
+\- API-key configuration.
+
+\- Credential storage through the operating system.
+
+\- Conversation history.
+
+\- Voice output integration.
+
+
+
+Provider availability depends on configuration and subscription implementation.
+
+
+
+\### Voice System
+
+
+
+\- Voice input and system interaction.
+
+\- Local neural text-to-speech through Piper.
+
+\- Russian Denis voice model.
+
+\- English Alan voice model.
+
+\- Voice settings and voice-model import support.
+
+
+
+\### Telegram Remote Control
+
+
+
+NEXUS includes a Telegram bot for remote interaction with the desktop system.
+
+
+
+Implemented capabilities include:
+
+
+
+\- Application launching.
+
+\- System status.
+
+\- Screenshots.
+
+\- Clipboard access and management.
+
+\- Volume control.
+
+\- URL opening.
+
+\- Macro execution.
+
+\- Authorized-user access control.
+
+
+
+Remote functionality requires a configured Telegram bot token and authorized user IDs.
+
+
+
+\### Automation and System Integration
+
+
+
+The Python subsystem contains modules for:
+
+
+
+\- Application discovery and launching.
+
+\- Macro execution.
+
+\- Window management.
+
+\- Clipboard operations.
+
+\- Screen capture and visual analysis.
+
+\- Notifications and process monitoring.
+
+\- Voice recognition and speech synthesis.
+
+\- Telegram remote control.
+
+\- Desktop system integration.
+
+
+
+\---
+
+
+
+\## Technology Stack
+
+
+
+| Component | Technology |
+
 |---|---|
-| `Nexus, open Discord` | Launches Discord |
-| `Nexus, open Minecraft` | Launches Minecraft |
-| `Nexus, set volume to 30` | Sets volume to 30% |
-| `Nexus, what's on my screen` | AI describes your screen |
-| `Nexus, thermals` | Reports CPU load and GPU temperature |
-| `Nexus, order pizza from Dominos` | Opens Dominos ordering page |
-| `Nexus, book a table at Swiss Chalet` | Opens OpenTable |
-| `Nexus, snap Discord to the left` | Snaps Discord window left |
-| `Nexus, tile Discord and Chrome` | Tiles two windows side by side |
-| `Nexus, open YouTube` | Opens YouTube in browser |
-| `Nexus, search Trackmania world records` | Google search |
-| `Nexus, kill Discord` | Asks confirmation then closes Discord |
-| `Nexus, sleep` | Puts PC to sleep |
-| `Nexus, restart` | Asks confirmation then restarts in 5s |
-| `Nexus, game mode` | Closes Chrome, opens Discord, sets volume 60 |
-| `Nexus, study mode` | Closes games and Discord, opens school portal |
-| `Nexus, remind me at 6pm to eat` | Sets a 6pm reminder |
 
-> **Speech errors are handled automatically.** Saying "rinecraft" opens Minecraft.
-> Saying "geo dash" opens Geometry Dash. "fort night" opens Fortnite.
+| Desktop framework | Tauri 2 |
 
----
+| Frontend | React 19 |
 
-## The Web Dashboard
+| Programming language | TypeScript |
 
-Open **http://localhost:8080** (or click **Open Dashboard** in the launcher).
+| Desktop integration | Rust |
 
-The Jarvis HUD dashboard shows:
-- Animated arc reactor in the centre
-- Live CPU and GPU stats
-- Activity log of everything Nexus says and does
-- Top applications by launch count
-- Notification feed (CPU/GPU alerts, reminders)
-- Command input box at the bottom
+| System automation | Python |
 
----
+| State management | Zustand |
 
-## Supported Food Ordering
+| AI communication | Provider APIs |
 
-Say *"Hey Jarvis, order [food] from [restaurant]"* and Nexus opens that restaurant's
-own ordering website directly on the menu/order page. You complete checkout yourself.
+| Neural speech | Piper TTS |
 
-Supported restaurants: **Domino's · KFC · Subway · McDonald's · Burger King · Pizza Hut ·
-Wendy's · Taco Bell · Popeyes · A&W · Harvey's · Swiss Chalet · Starbucks ·
-Tim Hortons · Boston Pizza**
+| Remote control | Telegram Bot API |
 
-For reservations: *"Hey Jarvis, book a table at [restaurant]"* opens OpenTable.
+| Frontend build | Vite |
 
-To add more restaurants, open `food_ordering.py` and add an entry to the `RESTAURANTS` dict.
+| Rust build | Cargo |
 
----
 
-## Adding Your Own Apps
 
-In `config.json` under `"apps"`:
-```json
-"valorant": {
-    "path": "C:\\Riot Games\\VALORANT\\live\\VALORANT.exe",
-    "description": "Valorant",
-    "priority": "high",
-    "flags": []
-}
+\---
+
+
+
+\## Project Structure
+
+
+
+```text
+
+NEXUS/
+
+├── nexus\_ui/
+
+│   ├── desktop/              # Previous desktop interface
+
+│   └── tauri/
+
+│       ├── src/              # React and TypeScript application
+
+│       │   ├── components/
+
+│       │   ├── lib/
+
+│       │   ├── stores/
+
+│       │   └── styles/
+
+│       └── src-tauri/        # Rust and Tauri integration
+
+├── piper\_models/             # Local Piper voice models
+
+├── app\_scanner.py
+
+├── conversation\_memory.py
+
+├── core\_nexus.py
+
+├── executor.py
+
+├── nexus\_clipboard.py
+
+├── nexus\_server.py
+
+├── nexus\_tauri\_bridge.py
+
+├── telegram\_control.py
+
+├── tts\_piper.py
+
+├── wake\_word.py
+
+├── window\_manager.py
+
+├── requirements.txt
+
+├── telegram\_config.example.json
+
+└── README.md
+
 ```
 
-Or just say *"Hey Jarvis, open [app name]"* — if the app is installed anywhere on your
-drives, Nexus will find it automatically and remember the path for next time.
 
----
 
-## Adding Your Own Macros
+\---
 
-Macros let you chain multiple actions into one voice command.
-Add them to `config.json` under `"macros"`:
 
-```json
-"stream mode": {
-    "description": "Get ready to stream",
-    "actions": [
-        { "type": "launch", "key": "obs"     },
-        { "type": "launch", "key": "discord" },
-        { "type": "volume", "level": 40      },
-        { "type": "speak",  "text": "Stream mode active." }
-    ]
-}
-```
 
-Then say *"Hey Jarvis, stream mode"* and all four things happen at once.
+\## Requirements
 
----
 
-## Custom Wake Word
 
-By default Nexus responds to **"Nexus"** — which fits the Iron Man theme.
+\- Windows 10 or Windows 11.
 
-To change it, update `config.json`:
-```json
-"wake_keyword": "alexa"
-```
+\- Node.js and npm.
 
-Available built-in options: `hey_jarvis`, `alexa`, `hey_mycroft`, `hey_rhasspy`
+\- Rust and Cargo.
 
-To train a custom **"Nexus"** wake word:
-1. Go to https://openwakeword.com
-2. Train a model for the word "Nexus"
-3. Download the `.tflite` file
-4. Save it as `F:\Projects\core-nexus\nexus_wakeword.tflite`
-5. Nexus will pick it up automatically on next launch
+\- Microsoft C++ Build Tools.
 
----
+\- Microsoft Edge WebView2 Runtime.
 
-## Troubleshooting
+\- Python 3.12.
 
-**Launcher opens but nothing starts**
-Make sure you're using the shortcut created by `create_shortcut.bat` — it points to
-the correct Python 3.12. If clicking the launcher directly, run it via PowerShell:
+
+
+\## Installation
+
+
+
+Clone the repository:
+
+
+
 ```powershell
-& "C:\Users\lukes\AppData\Local\Programs\Python\Python312\pythonw.exe" "F:\Projects\core-nexus\launcher.pyw"
+
+git clone https://github.com/Ushhejsj/NEXUS.git
+
+cd NEXUS
+
 ```
 
-**"Ollama is not running"**
+
+
+Install frontend dependencies:
+
+
+
 ```powershell
-ollama serve
+
+cd nexus\_ui/tauri
+
+npm ci
+
 ```
-Keep that window open, then relaunch Nexus.
 
-**Nexus can't hear you**
-Go to Windows Settings → System → Sound → set your mic as the default input device.
-Test without mic: `python core_nexus.py --text`
 
-**App won't open / wrong app launches**
-Add it manually to `config.json`. For Steam games use `steam://rungameid/APPID`.
-For desktop shortcuts point to the `.url` or `.lnk` file directly.
 
-**Force a fresh app scan**
+Install Python dependencies:
+
+
+
 ```powershell
-python app_scanner.py
+
+cd ../..
+
+python -m pip install -r requirements.txt
+
 ```
 
-**PyAudio won't install**
+
+
+\## Running NEXUS
+
+
+
+Start the Tauri development application:
+
+
+
 ```powershell
-pip install pipwin
-pipwin install pyaudio
+
+cd nexus\_ui/tauri
+
+npm run tauri dev
+
 ```
 
-**Piper voice not working**
+
+
+\## Development Checks
+
+
+
+Build the frontend:
+
+
+
 ```powershell
-pip install soundfile
-```
 
----
+cd nexus\_ui/tauri
 
-## Quick Cheat Sheet
+npm run build
 
 ```
-Start (GUI):         Double-click "Core Nexus" desktop shortcut
-Start (voice only):  python core_nexus.py
-Start (web UI only): python nexus_server.py
-Start (no mic):      python core_nexus.py --text
-Re-scan drives:      python app_scanner.py
-Start Ollama:        ollama serve
+
+
+
+Check the Rust backend:
+
+
+
+```powershell
+
+cd src-tauri
+
+cargo check
+
 ```
 
----
 
-## Hardware Recommendations
 
-| Component | Minimum | Recommended |
-|---|---|---|
-| GPU | NVIDIA GTX 1060 6GB | NVIDIA RTX 3070+ |
-| RAM | 8GB | 16GB+ |
-| OS | Windows 10 | Windows 11 |
-| Mic | Any USB/3.5mm | Dedicated USB mic |
+Start the frontend development server:
 
----
 
-*Built with Python · Powered by Ollama + gemma3:4b · Runs 100% locally*
-*Inspired by Jarvis from Iron Man*
+
+```powershell
+
+cd ..
+
+npm run dev
+
+```
+
+
+
+\---
+
+
+
+\## Telegram Configuration
+
+
+
+A template is provided in `telegram\_config.example.json`.
+
+
+
+Create your local configuration:
+
+
+
+```powershell
+
+Copy-Item telegram\_config.example.json telegram\_config.json
+
+```
+
+
+
+Configure your Telegram bot token and authorized user IDs in the local file.
+
+
+
+\*\*Security:\*\* Never commit `telegram\_config.json`, API keys, access tokens, or other private credentials.
+
+
+
+\---
+
+
+
+\## Voice Models
+
+
+
+NEXUS includes local Piper voice models:
+
+
+
+\- `ru\_RU-denis-medium` — Russian voice.
+
+\- `en\_GB-alan-medium` — English voice.
+
+
+
+Voice model usage is subject to the respective model licenses and terms.
+
+
+
+\---
+
+
+
+\---
+
+
+
+\## Project Status
+
+
+
+NEXUS is an actively developed personal AI system. Features, integrations, and interface components may change as development progresses.
+
+
+
+The current Tauri bundle configuration does not yet enable production installer generation.
+
+
+
+\## License
+
+
+
+No general open-source license has been specified yet. Public repository visibility does not automatically grant permission to reuse, modify, or redistribute the project.
