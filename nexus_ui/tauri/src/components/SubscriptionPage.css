@@ -1,0 +1,110 @@
+﻿.subscription-page {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding-bottom: 30px;
+  color: var(--text-primary, #fff);
+}
+.subscription-heading { margin: 5px 0 25px; }
+.subscription-overline {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--nexus-accent, #a995ff);
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 1.5px;
+}
+.subscription-heading h1 {
+  margin: 12px 0 8px;
+  font-size: clamp(23px, 3vw, 32px);
+  font-weight: 700;
+}
+.subscription-heading h1 span, .titan-plan h2 span { color: var(--nexus-accent, #b59cff); }
+.subscription-heading > p {
+  max-width: 600px;
+  margin: 0;
+  color: var(--text-secondary, #aaa7b8);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.subscription-plans {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 27px;
+}
+.subscription-plan {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  padding: 21px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 16px;
+  background: rgba(19,20,31,.42);
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+}
+.titan-plan {
+  border-color: color-mix(in srgb, var(--nexus-accent, #a995ff) 38%, transparent);
+  background: color-mix(in srgb, var(--nexus-accent, #a995ff) 8%, rgba(19,20,31,.5));
+}
+.titan-glow {
+  position: absolute;
+  width: 180px;
+  height: 130px;
+  right: -65px;
+  top: -75px;
+  border-radius: 50%;
+  background: var(--nexus-accent, #a995ff);
+  filter: blur(75px);
+  opacity: .18;
+  pointer-events: none;
+}
+.plan-topline { display: flex; align-items: center; gap: 10px; }
+.plan-icon {
+  display: grid;
+  place-items: center;
+  width: 37px;
+  height: 37px;
+  border-radius: 11px;
+  color: var(--nexus-accent, #a995ff);
+  background: color-mix(in srgb, var(--nexus-accent, #a995ff) 13%, transparent);
+}
+.plan-label { color: var(--text-secondary, #aaa7b8); font-size: 8px; font-weight: 750; letter-spacing: 1.1px; }
+.subscription-plan h2 { margin: 17px 0 7px; font-size: 17px; letter-spacing: .3px; }
+.plan-price { font-size: 30px; font-weight: 750; letter-spacing: -.8px; }
+.plan-price small { color: var(--text-secondary, #aaa7b8); font-size: 11px; font-weight: 450; letter-spacing: 0; }
+.plan-year-price { margin-top: 4px; color: var(--nexus-accent, #b59cff); font-size: 10px; }
+.plan-description { min-height: 37px; margin: 12px 0 17px; color: var(--text-secondary, #aaa7b8); font-size: 11px; line-height: 1.6; }
+.plan-status { display: flex; align-items: center; gap: 7px; color: #8fd8ad; font-size: 10px; }
+.titan-status { color: var(--nexus-accent, #c0aaff); }
+.subscription-comparison {
+  padding: 19px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 15px;
+  background: rgba(17,19,29,.34);
+  backdrop-filter: blur(17px);
+}
+.comparison-heading { display: flex; justify-content: space-between; align-items: end; gap: 12px; margin-bottom: 14px; }
+.comparison-heading h2 { margin: 7px 0 0; font-size: 18px; }
+.comparison-columns { display: grid; grid-template-columns: 48px 48px; gap: 8px; text-align: center; color: var(--text-secondary, #aaa7b8); font-size: 9px; font-weight: 750; }
+.comparison-columns .titan-column { color: var(--nexus-accent, #b59cff); }
+.comparison-group { margin-top: 17px; }
+.comparison-group-title { display: flex; align-items: center; gap: 8px; padding: 10px 0; color: var(--nexus-accent, #b59cff); font-size: 11px; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,.08); }
+.comparison-row { display: grid; grid-template-columns: minmax(0,1fr) 48px 48px; gap: 8px; align-items: center; min-height: 37px; border-bottom: 1px solid rgba(255,255,255,.045); text-align: center; }
+.comparison-feature { text-align: left; color: var(--text-secondary, #c0bdca); font-size: 10px; line-height: 1.5; }
+.plan-feature-check { justify-self: center; color: #8fd8ad; }
+.plan-feature-dash { color: rgba(255,255,255,.25); font-size: 13px; }
+.subscription-note { display: flex; align-items: flex-start; gap: 10px; margin-top: 14px; padding: 13px 15px; border: 1px solid rgba(255,255,255,.07); border-radius: 11px; color: var(--text-secondary, #aaa7b8); background: rgba(255,255,255,.025); }
+.subscription-note svg { flex: 0 0 auto; margin-top: 1px; color: var(--nexus-accent, #a995ff); }
+.subscription-note p { margin: 0; font-size: 10px; line-height: 1.65; }
+.subscription-footer { display: flex; align-items: center; gap: 8px; margin-top: 15px; color: var(--text-secondary, #aaa7b8); font-size: 10px; opacity: .75; }
+.subscription-footer svg { color: var(--nexus-accent, #a995ff); }
+@media (max-width: 650px) {
+  .subscription-plans { grid-template-columns: 1fr; }
+  .subscription-plan { padding: 17px; }
+  .subscription-comparison { padding: 13px; }
+  .comparison-columns { grid-template-columns: 39px 39px; gap: 5px; }
+  .comparison-row { grid-template-columns: minmax(0,1fr) 39px 39px; gap: 5px; }
+}

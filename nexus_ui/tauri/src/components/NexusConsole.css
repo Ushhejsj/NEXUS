@@ -1,0 +1,215 @@
+.nexus-console {
+  width: 100%;
+  max-width: 790px;
+  margin: 8px auto 28px;
+  padding: 19px;
+  border: 1px solid rgba(173, 158, 235, .16);
+  border-radius: 17px;
+  background: rgba(17, 16, 27, .58);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, .13), inset 0 1px 0 rgba(255,255,255,.035);
+  backdrop-filter: blur(22px) saturate(135%);
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+}
+
+.nexus-console-header,
+.nexus-console-heading,
+.nexus-core-status,
+.nexus-console-meta,
+.nexus-console-input-row,
+.nexus-confirmation-text,
+.nexus-confirmation-actions {
+  display: flex;
+  align-items: center;
+}
+
+.nexus-console-header { justify-content: space-between; gap: 12px; }
+.nexus-console-heading { gap: 11px; }
+.nexus-console-icon {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  color: #b7a5ff;
+  border: 1px solid rgba(173, 153, 255, .2);
+  border-radius: 11px;
+  background: rgba(151, 125, 255, .09);
+}
+.nexus-console-title { color: #eeeafa; font-size: 11px; font-weight: 750; letter-spacing: 1.5px; }
+.nexus-console-subtitle { margin-top: 4px; color: #888497; font-size: 10px; }
+.nexus-core-status { gap: 7px; color: #9993a9; font-size: 8px; font-weight: 750; letter-spacing: 1px; white-space: nowrap; }
+.nexus-core-status span { width: 6px; height: 6px; border-radius: 50%; background: #777; }
+.nexus-core-status.online { color: #85cda9; }
+.nexus-core-status.online span { background: #65d49a; box-shadow: 0 0 9px rgba(101,212,154,.65); }
+.nexus-core-status.offline { color: #d49b9b; }
+.nexus-core-status.offline span { background: #d36c75; }
+
+.nexus-console-meta { gap: 14px; flex-wrap: wrap; margin: 14px 0 0 47px; color: #777386; font-size: 8px; letter-spacing: .7px; }
+.nexus-console-meta-error { color: #dc9298; }
+.nexus-console-warning { display: flex; gap: 8px; margin-top: 13px; color: #e0a0a5; font-size: 10px; line-height: 1.5; }
+
+.nexus-console-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 270px;
+  min-height: 90px;
+  overflow-y: auto;
+  margin: 17px 0 13px;
+  padding: 13px;
+  border: 1px solid rgba(255,255,255,.055);
+  border-radius: 12px;
+  background: rgba(5, 5, 11, .2);
+}
+.nexus-console-message { display: flex; gap: 8px; max-width: 94%; }
+.nexus-console-message.user { align-self: flex-end; justify-content: flex-end; }
+.nexus-console-message.assistant { align-self: flex-start; }
+.nexus-console-message.system { align-self: flex-start; margin-left: 21px; }
+.message-mark { color: #a997f1; padding-top: 2px; }
+.message-content { color: #c7c3d2; font-size: 11px; line-height: 1.65; overflow-wrap: anywhere; }
+.nexus-console-message.user .message-content {
+  padding: 8px 11px;
+  color: #eeeafa;
+  border: 1px solid rgba(164,145,255,.16);
+  border-radius: 11px 11px 3px 11px;
+  background: rgba(135,111,220,.13);
+}
+.nexus-console-message.system .message-content { color: #8f899e; font-size: 10px; }
+.nexus-console-loading { display: flex; align-items: center; gap: 8px; color: #9f94c7; font-size: 10px; }
+.nexus-spin { animation: nexus-console-spin 1s linear infinite; }
+@keyframes nexus-console-spin { to { transform: rotate(360deg); } }
+
+.nexus-confirmation {
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid rgba(221,174,104,.22);
+  border-radius: 11px;
+  background: rgba(174,125,53,.07);
+}
+.nexus-confirmation-text { gap: 8px; color: #e5c58f; font-size: 11px; line-height: 1.5; }
+.nexus-confirmation-actions { gap: 8px; margin-top: 11px; }
+.nexus-confirmation-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 7px;
+  font-size: 10px;
+  cursor: pointer;
+}
+.nexus-confirm-yes { color: #17140f; border: 1px solid #d6b779; background: #d6b779; }
+.nexus-confirm-no { color: #c7bdac; border: 1px solid rgba(214,183,121,.2); background: rgba(255,255,255,.035); }
+
+.nexus-console-input-row { gap: 9px; align-items: stretch; }
+.nexus-console-input-row textarea {
+  flex: 1;
+  min-width: 0;
+  resize: vertical;
+  min-height: 43px;
+  max-height: 110px;
+  padding: 12px 13px;
+  color: #e5e1ef;
+  border: 1px solid rgba(174,157,231,.16);
+  border-radius: 10px;
+  outline: none;
+  background: rgba(7,7,13,.34);
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.nexus-console-input-row textarea:focus { border-color: rgba(169,148,255,.48); }
+.nexus-console-input-row textarea::placeholder { color: #777285; }
+.nexus-console-send {
+  width: 43px;
+  min-width: 43px;
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  color: #eae5ff;
+  border: 1px solid rgba(172,151,255,.25);
+  border-radius: 10px;
+  background: rgba(139,115,226,.18);
+  cursor: pointer;
+}
+.nexus-console-send:disabled,
+.nexus-confirmation-actions button:disabled { opacity: .4; cursor: not-allowed; }
+.nexus-console-hint { margin-top: 8px; color: #6f6b7e; font-size: 8px; letter-spacing: .45px; text-align: right; }
+
+[data-scheme="white"] .nexus-console {
+  background: rgba(255,255,255,.62);
+  border-color: rgba(120,110,155,.2);
+}
+[data-scheme="white"] .nexus-console-title,
+[data-scheme="white"] .message-content { color: #393448; }
+[data-scheme="white"] .nexus-console-input-row textarea { color: #302b3d; background: rgba(255,255,255,.55); }
+
+@media (max-width: 650px) {
+  .nexus-console { padding: 13px; }
+  .nexus-console-subtitle { max-width: 170px; }
+  .nexus-core-status { font-size: 7px; }
+  .nexus-console-meta { margin-left: 0; }
+}
+
+
+/* NEXUS CORE — голосовой ввод */
+.nexus-console-mic {
+  flex: 0 0 43px;
+  width: 43px;
+  min-width: 43px;
+  height: 43px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  color: inherit;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.nexus-console-mic:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.nexus-console-mic:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.nexus-console-mic:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.nexus-console-mic.listening {
+  color: #ffffff;
+  background: rgba(220, 65, 65, 0.28);
+  border-color: rgba(255, 100, 100, 0.65);
+}
+
+/* NEXUS LIQUID GLASS — CONSOLE */
+[data-liquid-glass="true"] .nexus-console {
+  background: rgba(145,140,170,.075);
+  border: 1px solid rgba(255,255,255,.17);
+  backdrop-filter: blur(25px) saturate(155%);
+  -webkit-backdrop-filter: blur(25px) saturate(155%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12),
+              0 14px 36px rgba(0,0,0,.12);
+}
+
+[data-liquid-glass="true"] .nexus-console-message.user .message-content,
+[data-liquid-glass="true"] .nexus-confirmation {
+  background: rgba(150,125,220,.13);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+[data-liquid-glass="true"] .nexus-console-input-row textarea {
+  background: rgba(20,18,30,.22);
+  border-color: rgba(255,255,255,.2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}

@@ -1,0 +1,56 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Secrets
+telegram_config.json
+secrets/
+credentials/
+*.pem
+*.key
+
+# Personal data and runtime state
+app_cache.json
+clipboard_history.json
+conversation_history.json
+launch_failures.json
+notifications_log.json
+usage_stats.json
+nexus_core/memory/
+nexus_core/config.json
+nexus_ui/desktop/nexus_settings.json
+
+# Local backups
+*.bak
+*.backup
+*.before-*
+*.voice-backup
+*.voice_backup
+
+# Build artifacts
+node_modules/
+dist/
+target/
+build/
+*.spec
+.pytest_cache/
+
+# OS and IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+/config.json
+
+# Backup snapshots — keep locally, never publish
+*backup*
+*.bak*
+*.before*
+*before_*
+*before-*

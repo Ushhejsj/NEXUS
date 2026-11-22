@@ -1,0 +1,9 @@
+[
+    {
+        "name": "test",
+        "apps": [
+            "notepad.exe",
+            "calc.exe"
+        ]
+    }
+]
